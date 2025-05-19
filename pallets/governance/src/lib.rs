@@ -11,11 +11,6 @@ pub mod proposal;
 pub mod voting;
 pub mod weights; // Weight benchmarks
 
-#[cfg(test)]
-mod mock;
-#[cfg(test)]
-mod tests;
-
 use frame_support::{
     dispatch::DispatchResult,
     ensure,
@@ -401,13 +396,24 @@ pub mod pallet {
         /// A new application has been created.
         ApplicationCreated(u64),
         /// The treasury address has been updated during migration.
-        /// This event is emitted when the treasury address is changed as part of a runtime upgrade.
-        /// It provides an on-chain audit trail of the treasury address change.
+        /// This event is emitted when the treasury address is changed as part of a runtime
+        /// upgrade. It provides an on-chain audit trail of the treasury address change.
         TreasuryAddressUpdated {
             /// The previous treasury address
             old_address: T::AccountId,
             /// The new treasury address
             new_address: T::AccountId,
+        },
+        /// Treasury balance has been transferred during migration.
+        /// This event is emitted when the balance is transferred from the old treasury to the new
+        /// treasury. It provides an on-chain audit trail of the treasury balance transfer.
+        TreasuryBalanceTransferred {
+            /// The source treasury address
+            old_address: T::AccountId,
+            /// The destination treasury address
+            new_address: T::AccountId,
+            /// The amount transferred
+            amount: u128,
         },
     }
 

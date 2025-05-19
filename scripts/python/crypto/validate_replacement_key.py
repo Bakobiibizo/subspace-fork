@@ -38,7 +38,7 @@ def extract_migration_bytes_array() -> str:
     # Find the line containing the public key bytes declaration
     byte_array_start_idx = -1
     for i, line in enumerate(target_lines):
-        if "let public_key_bytes: [u8; 32] = [" in line:
+        if "let public_key_bytes: [u8; 36] = [" in line:
             byte_array_start_idx = i
             break
     
@@ -50,9 +50,10 @@ def extract_migration_bytes_array() -> str:
     indent = " " * 12  # Expected indentation
     first_line = target_lines[byte_array_start_idx + 1].strip().removeprefix(indent)
     second_line = target_lines[byte_array_start_idx + 2].strip().removeprefix(indent)
+    third_line = target_lines[byte_array_start_idx + 3].strip().removeprefix(indent)
     
     # Combine the lines
-    formatted_array_string = first_line + " " + second_line
+    formatted_array_string = first_line + " " + second_line + " " + third_line
     return formatted_array_string
 
 def write_bytes_to_migration_file(bytes_str: str) -> bool:
