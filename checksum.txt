@@ -1,0 +1,1 @@
+e5300bbe5755535b97a3081b6e49f128add9d9733a72fd40439a0be6d6415ae1  target/release/wbuild/node-subspace-runtime/node_subspace_runtime.compact.wasm
